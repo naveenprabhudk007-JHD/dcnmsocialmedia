@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DCNM Digital World | Premium Digital Hub</title>
+    <!-- Tailwind CSS for modern rapid layouts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Space Grotesk for High-End Futuristic Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons (Upgraded to v6.5.2 to support fa-x-twitter) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Three.js for 3D Holographic Earth -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        space: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        gold: {
+                            DEFAULT: '#D4AF37',
+                            light: '#F3E5AB',
+                            dark: '#AA7C11',
+                        },
+                        cyber: {
+                            blue: '#00f3ff',
+                            purple: '#8a2be2',
+                            dark: '#030303',
+                            card: 'rgba(10, 10, 15, 0.7)',
+                        }
+                    },
+                    boxShadow: {
+                        'neon-blue': '0 0 20px rgba(0, 243, 255, 0.25)',
+                        'neon-gold': '0 0 20px rgba(212, 175, 55, 0.25)',
+                        'neon-purple': '0 0 30px rgba(138, 43, 226, 0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Animations and Luxury Glassmorphic Styles */
+        body {
+            background-color: #030303;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Ambient glowing backgrounds */
+        .glowing-orb-1 {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.15) 0%, rgba(0,0,0,0) 70%);
+            top: -10%;
+            left: -10%;
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(80px);
+        }
+
+        .glowing-orb-2 {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(0, 243, 255, 0.12) 0%, rgba(0,0,0,0) 70%);
+            bottom: 10%;
+            right: -10%;
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(100px);
+        }
+
+        .glowing-orb-3 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, rgba(0,0,0,0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(90px);
+        }
+
+        /* Glassmorphism Cards */
+        .glass-panel {
+            background: rgba(13, 13, 18, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-panel:hover {
+            background: rgba(20, 20, 28, 0.8);
+            border-color: rgba(0, 243, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 243, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .glass-panel-gold {
+            background: rgba(13, 13, 18, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-panel-gold:hover {
+            background: rgba(22, 18, 10, 0.8);
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.1);
+            transform: translateY(-5px);
+        }
+
+        /* Premium scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030303;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #22222a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4af37;
+        }
+
+        /* Typography effect */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF 0%, #D4AF37 50%, #AA7C11 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cyber-gradient-text {
+            background: linear-gradient(135deg, #00f3ff 0%, #8a2be2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Custom subtle floating animation */
+        @keyframes subtleFloat {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .float-animation {
+            animation: subtleFloat 6s ease-in-out infinite;
+        }
+
+        /* Particle Stars in Hero background */
+        #stars-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Secure overlay for custom modals */
+        .modal-blur {
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-200">
+
+    <!-- Glowing Background Orbs -->
+    <div class="glowing-orb-1"></div>
+    <div class="glowing-orb-2"></div>
+    <div class="glowing-orb-3"></div>
+
+    <!-- STARFIELD BACKGROUND CANVAS -->
+    <canvas id="stars-canvas"></canvas>
+
+    <!-- HEADER / NAVIGATION (Luxury Apple Style) -->
+    <header class="sticky top-0 z-50 w-full border-b border-white/5 bg-black/40 backdrop-blur-md transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-gold to-yellow-500 flex items-center justify-center shadow-lg shadow-gold/20 transition-transform group-hover:scale-105">
+                    <span class="text-black font-space font-extrabold text-xl">D</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-space font-bold tracking-wider text-white text-lg leading-none group-hover:text-gold transition-colors">DCNM</span>
+                    <span class="text-[10px] text-gray-400 tracking-widest uppercase font-semibold">Digital World</span>
+                </div>
+            </a>
+            
+            <nav class="hidden md:flex items-center space-x-8 text-sm tracking-wider uppercase font-semibold">
+                <a href="#hero" class="text-gray-400 hover:text-white transition-colors">Home</a>
+                <a href="#social-hub" class="text-gray-400 hover:text-white transition-colors">Social Platforms</a>
+                <a href="#google-reviews" class="text-gray-400 hover:text-white transition-colors">Reviews</a>
+                <a href="#feedback" class="text-gray-400 hover:text-white transition-colors">Connect</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <a href="#social-hub" class="relative group overflow-hidden px-5 py-2.5 rounded-full bg-gradient-to-r from-gold/10 to-gold/20 border border-gold/30 hover:border-gold/80 transition-all text-xs tracking-wider font-semibold text-gold uppercase shadow-lg shadow-gold/5 hover:shadow-gold/10">
+                    <span class="relative z-10 flex items-center gap-2">Explore Hub <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION 1: HERO SECTION -->
+    <section id="hero" class="relative min-h-[95vh] flex items-center justify-center overflow-hidden py-16 px-6 z-10">
+        <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Grid: Premium Copywriting -->
+            <div class="lg:col-span-7 flex flex-col justify-center text-center lg:text-left z-20">
+                <div class="inline-flex items-center justify-center lg:justify-start space-x-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 w-fit mx-auto lg:mx-0 mb-6 float-animation">
+                    <span class="w-2 h-2 rounded-full bg-gold animate-ping"></span>
+                    <span class="text-xs tracking-widest text-gold font-semibold uppercase">The Luxury Ecosystem Hub</span>
+                </div>
+                
+                <h1 id="hero-welcome" class="text-md sm:text-lg font-semibold tracking-widest text-gray-400 uppercase font-space">
+                    WELCOME TO
+                </h1>
+                <h2 id="hero-title" class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mt-3 mb-6 font-space leading-tight">
+                    <span class="gold-gradient-text">DCNM</span> <br class="hidden sm:inline">DIGITAL WORLD
+                </h2>
+                
+                <p id="hero-subtitle" class="text-base sm:text-lg text-gray-400 font-light max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed">
+                    Step inside a masterfully engineered dynamic architecture built for seamless social interaction, branch performance reviews, and customer expression.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="#social-hub" class="px-8 py-4 bg-gradient-to-r from-gold to-yellow-600 hover:from-yellow-500 hover:to-gold-dark text-black font-semibold text-sm tracking-widest uppercase rounded-lg shadow-lg shadow-gold/15 hover:shadow-gold/30 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2">
+                        Get Started <i class="fa-solid fa-compass"></i>
+                    </a>
+                    <a href="#feedback" class="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white font-semibold text-sm tracking-widest uppercase rounded-lg hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2">
+                        Leave Feedback <i class="fa-solid fa-comment-dots"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Grid: 3D Holographic Globe -->
+            <div class="lg:col-span-5 flex justify-center items-center relative z-20">
+                <div class="relative w-[340px] h-[340px] sm:w-[450px] sm:h-[450px] flex items-center justify-center">
+                    <!-- Glass outer glow ring -->
+                    <div class="absolute inset-0 rounded-full border border-gold/10 scale-90 sm:scale-100 pointer-events-none animate-pulse"></div>
+                    <div class="absolute inset-4 rounded-full border border-cyber-blue/10 scale-95 sm:scale-105 pointer-events-none animate-spin" style="animation-duration: 20s;"></div>
+                    
+                    <!-- 3D ThreeJS Canvas Container -->
+                    <div id="globe-container" class="w-full h-full cursor-grab active:cursor-grabbing"></div>
+                    
+                    <!-- High tech interactive label -->
+                    <div class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-md px-4 py-2 rounded-full border border-white/5 flex items-center gap-2 shadow-xl">
+                        <i class="fa-solid fa-circle-nodes text-cyber-blue animate-pulse"></i>
+                        <span class="text-[10px] tracking-widest text-gray-400 font-semibold uppercase">Interactive Holographic Earth</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 2: EXPLORE OUR SOCIAL MEDIA -->
+    <section id="social-hub" class="relative py-28 px-6 z-10 border-t border-white/5 bg-gradient-to-b from-transparent to-black/30">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <div class="inline-block px-4 py-1.5 rounded-full bg-gold/5 border border-gold/20 mb-4">
+                    <span class="text-xs tracking-widest text-gold font-semibold uppercase">Connected Universe</span>
+                </div>
+                <h2 id="social-heading" class="text-3xl sm:text-5xl font-extrabold font-space tracking-tight mb-6">
+                    EXPLORE OUR <span class="gold-gradient-text">SOCIAL MEDIA</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-gold to-yellow-600 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- 9 High End Animated Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="social-grid">
+                <!-- Cards injected programmatically with JS -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 3: GOOGLE REVIEWS & FEEDBACK -->
+    <section id="google-reviews" class="relative py-28 px-6 z-10 border-t border-white/5 bg-gradient-to-b from-black/30 to-transparent">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <div class="inline-block px-4 py-1.5 rounded-full bg-cyber-blue/5 border border-cyber-blue/20 mb-4">
+                    <span class="text-xs tracking-widest text-cyber-blue font-semibold uppercase">Client Voices</span>
+                </div>
+                <h2 id="reviews-heading" class="text-3xl sm:text-5xl font-extrabold font-space tracking-tight mb-6">
+                    GOOGLE REVIEWS & <span class="cyber-gradient-text">FEEDBACK</span>
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-cyber-blue to-cyber-purple mx-auto rounded-full"></div>
+                <p class="text-gray-400 mt-6 max-w-xl mx-auto font-light text-sm sm:text-base">
+                    Select your preferred regional branch to submit an authentic Google review, or write to our executive desk via the direct feedback form.
+                </p>
+            </div>
+
+            <!-- 6 Branch Review Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-24" id="reviews-grid">
+                <!-- Dynamic Review cards injected here -->
+            </div>
+
+            <!-- Feedback Form -->
+            <div id="feedback" class="max-w-3xl mx-auto mt-20 relative">
+                <!-- Background decorative glow -->
+                <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-gold/20 to-cyber-blue/20 blur-xl opacity-30"></div>
+                
+                <div class="relative glass-panel rounded-2xl border border-white/10 p-8 sm:p-12 shadow-2xl">
+                    <div class="flex items-center space-x-4 mb-8 border-b border-white/10 pb-6">
+                        <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center border border-gold/30">
+                            <i class="fa-solid fa-paper-plane text-gold text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold font-space text-white">Direct Executive Feedback</h3>
+                            <p class="text-xs text-gray-400 mt-1 uppercase tracking-wider">Your inputs route directly to our core administration</p>
+                        </div>
+                    </div>
+
+                    <form id="feedbackForm" class="space-y-6" onsubmit="handleFeedbackSubmit(event)">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-semibold tracking-wider text-gray-300 uppercase mb-2">Full Name <span class="text-gold">*</span></label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-500"><i class="fa-regular fa-user"></i></span>
+                                    <input type="text" id="fb_name" required class="w-full pl-11 pr-4 py-3.5 bg-black/40 border border-white/10 rounded-xl focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-all text-sm text-white placeholder-gray-600" placeholder="e.g. John Doe">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold tracking-wider text-gray-300 uppercase mb-2">Mobile Number <span class="text-gold">*</span></label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-500"><i class="fa-solid fa-mobile-screen-button"></i></span>
+                                    <input type="tel" id="fb_phone" required class="w-full pl-11 pr-4 py-3.5 bg-black/40 border border-white/10 rounded-xl focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-all text-sm text-white placeholder-gray-600" placeholder="e.g. +91 98765 43210">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-semibold tracking-wider text-gray-300 uppercase mb-2">Email Address <span class="text-gold">*</span></label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-500"><i class="fa-regular fa-envelope"></i></span>
+                                    <input type="email" id="fb_email" required class="w-full pl-11 pr-4 py-3.5 bg-black/40 border border-white/10 rounded-xl focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-all text-sm text-white placeholder-gray-600" placeholder="e.g. name@domain.com">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold tracking-wider text-gray-300 uppercase mb-2">Subject <span class="text-gold">*</span></label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-500"><i class="fa-solid fa-circle-info"></i></span>
+                                    <input type="text" id="fb_subject" required class="w-full pl-11 pr-4 py-3.5 bg-black/40 border border-white/10 rounded-xl focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-all text-sm text-white placeholder-gray-600" placeholder="e.g. Customer Experience">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold tracking-wider text-gray-300 uppercase mb-2">Message <span class="text-gold">*</span></label>
+                            <div class="relative">
+                                <span class="absolute top-4 left-4 text-gray-500"><i class="fa-regular fa-comment"></i></span>
+                                <textarea id="fb_message" rows="5" required class="w-full pl-11 pr-4 py-3.5 bg-black/40 border border-white/10 rounded-xl focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-all text-sm text-white placeholder-gray-600 resize-none" placeholder="Write your exquisite thoughts..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Feedback message state feedback -->
+                        <div id="form-error-msg" class="hidden text-red-400 text-xs bg-red-500/10 border border-red-500/20 p-3 rounded-lg flex items-center gap-2">
+                            <i class="fa-solid fa-triangle-exclamation"></i> <span id="error-text">Please complete all fields correctly.</span>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-gold to-yellow-600 hover:from-yellow-500 hover:to-gold-dark text-black font-semibold text-sm tracking-widest uppercase shadow-lg shadow-gold/15 hover:shadow-gold/30 transition-all flex items-center justify-center gap-2">
+                            Submit Form <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 4: THANK YOU SECTION -->
+    <section class="relative py-32 px-6 z-10 border-t border-white/5 overflow-hidden">
+        <div class="absolute inset-0 bg-radial-gradient from-gold/10 via-transparent to-transparent opacity-60 pointer-events-none"></div>
+        <div class="max-w-5xl mx-auto text-center relative z-20">
+            <div class="w-20 h-20 rounded-full bg-gold/5 border border-gold/30 flex items-center justify-center mx-auto mb-8 float-animation">
+                <i class="fa-solid fa-shield-heart text-gold text-3xl animate-pulse"></i>
+            </div>
+            
+            <h2 id="thankyou-title" class="text-4xl sm:text-6xl font-extrabold tracking-tight font-space mb-6">
+                THANK YOU FOR JOINING OUR <br><span class="gold-gradient-text">DCNM FAMILY</span>
+            </h2>
+            
+            <p id="thankyou-subtitle" class="text-gray-400 font-light max-w-2xl mx-auto leading-relaxed text-sm sm:text-base">
+                Your presence in our ecosystem drives our relentless pursuit of futuristic luxury, perfect operational performance, and worldwide connectivity. Let us reshape the boundaries together.
+            </p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="relative z-10 border-t border-white/10 bg-black/95 py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-gold to-yellow-500 flex items-center justify-center shadow-md">
+                    <span class="text-black font-space font-extrabold text-sm">D</span>
+                </div>
+                <div class="text-left">
+                    <span class="font-space font-bold tracking-wider text-white text-md">DCNM</span>
+                    <p class="text-[9px] text-gray-500 tracking-widest uppercase">Digital World</p>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-8 text-xs text-gray-400">
+                <a href="#" class="hover:text-gold transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-gold transition-colors">Terms & Conditions</a>
+                <a href="#" class="hover:text-gold transition-colors">Global Network</a>
+                <a href="#" class="hover:text-gold transition-colors">Interactive Hub</a>
+            </div>
+
+            <div class="flex flex-col items-center md:items-end gap-2 text-xs text-gray-500">
+                <span>&copy; <span id="current-year">2026</span> DCNM Digital World. All Rights Reserved.</span>
+                <!-- Hidden Admin Login Trigger designed perfectly -->
+                <button onclick="toggleLoginModal(true)" class="text-gray-700 hover:text-gold-dark text-[10px] tracking-widest uppercase font-semibold border-b border-dashed border-gray-800 hover:border-gold transition-all mt-1">
+                    System Control Center
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SUCCESS MESSAGE MODAL (Feedback Form Custom Overlay) -->
+    <div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 modal-blur opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="max-w-md w-full bg-zinc-950 border border-gold/30 rounded-2xl p-8 text-center shadow-2xl relative">
+            <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 rounded-full bg-gold/10 border border-gold/40 flex items-center justify-center shadow-lg shadow-gold/10">
+                <i class="fa-solid fa-circle-check text-gold text-4xl"></i>
+            </div>
+            
+            <div class="mt-14 mb-8">
+                <h3 class="text-2xl font-bold font-space text-white mb-2">Feedback Received</h3>
+                <p class="text-xs text-gold uppercase tracking-widest font-semibold mb-4">Transmission Successful</p>
+                <p class="text-gray-400 font-light text-sm">Your feedback was successfully secure-routed to our operational headquarters. The DCNM Digital World appreciates your continuous premium engagement.</p>
+            </div>
+
+            <button onclick="closeSuccessModal()" class="w-full py-3 rounded-lg bg-gold text-black font-semibold text-xs tracking-widest uppercase shadow-md shadow-gold/20 hover:bg-yellow-400 transition-colors">
+                Acknowledge
+            </button>
+        </div>
+    </div>
+
+    <!-- ADMIN LOGIN MODAL -->
+    <div id="loginModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 modal-blur opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="max-w-md w-full bg-zinc-950 border border-gold/20 rounded-2xl p-8 sm:p-10 shadow-2xl relative">
+            <!-- Close Button -->
+            <button onclick="toggleLoginModal(false)" class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="text-center mb-8">
+                <div class="w-12 h-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-key text-gold"></i>
+                </div>
+                <h3 class="text-xl font-bold font-space text-white">Security Credentials</h3>
+                <p class="text-xs text-gray-500 mt-1 uppercase tracking-wider">Accessing admin systems control</p>
+            </div>
+
+            <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-6">
+                <div>
+                    <label class="block text-xs font-semibold tracking-wider text-gray-400 uppercase mb-2">Username</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-500"><i class="fa-regular fa-user"></i></span>
+                        <input type="text" id="username" required class="w-full pl-11 pr-4 py-3 bg-black/60 border border-white/10 rounded-lg focus:border-gold outline-none transition-all text-sm text-white">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold tracking-wider text-gray-400 uppercase mb-2">System Password</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-500"><i class="fa-solid fa-lock"></i></span>
+                        <input type="password" id="password" required class="w-full pl-11 pr-4 py-3 bg-black/60 border border-white/10 rounded-lg focus:border-gold outline-none transition-all text-sm text-white">
+                    </div>
+                </div>
+
+                <div id="login-error" class="hidden text-red-400 text-xs bg-red-500/10 border border-red-500/20 p-3 rounded-lg flex items-center gap-2">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>Incorrect username or password.</span>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 rounded-lg bg-gradient-to-r from-gold to-yellow-600 hover:from-yellow-500 hover:to-gold-dark text-black font-semibold text-xs tracking-widest uppercase shadow-lg shadow-gold/15 transition-all">
+                    Initiate Decryption
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MAIN ADMIN DASHBOARD OVERLAY VIEW -->
+    <div id="adminDashboard" class="fixed inset-0 z-50 bg-cyber-dark/95 modal-blur opacity-0 pointer-events-none transition-opacity duration-300 overflow-y-auto">
+        <div class="min-h-screen flex flex-col">
+            <!-- Dashboard Nav -->
+            <header class="border-b border-white/10 bg-black/80 px-6 py-4 flex items-center justify-between sticky top-0 z-50">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-lg bg-gold/10 border border-gold/30 flex items-center justify-center">
+                        <i class="fa-solid fa-terminal text-gold text-sm animate-pulse"></i>
+                    </div>
+                    <div>
+                        <span class="font-space font-bold tracking-wider text-white text-md">DCNM COMMAND CENTRE</span>
+                        <p class="text-[9px] text-gold tracking-widest uppercase">Content Management & Feedback Matrix</p>
+                    </div>
+                </div>
+                
+                <button onclick="handleLogout()" class="px-4 py-2 bg-red-500/10 border border-red-500/30 hover:bg-red-500/20 hover:border-red-500 text-red-400 text-xs tracking-wider uppercase font-semibold rounded-lg transition-all flex items-center gap-2">
+                    Logout <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
+            </header>
+
+            <!-- Dashboard Content Container -->
+            <main class="flex-1 max-w-7xl w-full mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Sidebar tabs menu -->
+                <div class="lg:col-span-3 space-y-2">
+                    <button onclick="switchTab('social-manager')" id="tab-btn-social-manager" class="w-full text-left px-4 py-3 rounded-xl bg-gold text-black font-semibold text-xs tracking-widest uppercase transition-all flex items-center justify-between">
+                        <span><i class="fa-solid fa-share-nodes mr-2"></i> Social Manager</span>
+                        <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </button>
+                    <button onclick="switchTab('review-manager')" id="tab-btn-review-manager" class="w-full text-left px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white font-semibold text-xs tracking-widest uppercase transition-all flex items-center justify-between">
+                        <span><i class="fa-solid fa-star-half-stroke mr-2"></i> Review Manager</span>
+                        <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </button>
+                    <button onclick="switchTab('content-manager')" id="tab-btn-content-manager" class="w-full text-left px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white font-semibold text-xs tracking-widest uppercase transition-all flex items-center justify-between">
+                        <span><i class="fa-solid fa-file-pen mr-2"></i> Content Manager</span>
+                        <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </button>
+                    <button onclick="switchTab('feedback-manager')" id="tab-btn-feedback-manager" class="w-full text-left px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white font-semibold text-xs tracking-widest uppercase transition-all flex items-center justify-between">
+                        <span><i class="fa-solid fa-inbox mr-2"></i> Feedback Manager</span>
+                        <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </button>
+                </div>
+
+                <!-- Central Config Workspace -->
+                <div class="lg:col-span-9">
+                    <!-- Global Update Flash message -->
+                    <div id="save-success-banner" class="hidden mb-6 p-4 rounded-xl bg-green-500/10 border border-green-500/30 text-green-400 text-xs font-semibold flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check"></i> Command received. System updated successfully!
+                    </div>
+
+                    <!-- TAB 1: SOCIAL MEDIA MANAGER -->
+                    <div id="tab-social-manager" class="tab-content glass-panel p-6 sm:p-8 rounded-2xl border border-white/10 space-y-6">
+                        <div class="border-b border-white/10 pb-4">
+                            <h3 class="text-xl font-bold font-space text-white">Social Media Ecosystem Editor</h3>
+                            <p class="text-xs text-gray-400 mt-1">Configure live redirection URLs for the front-facing dashboard ecosystem.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">Instagram Link</label>
+                                <input type="url" id="admin_url_instagram" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">YouTube Link</label>
+                                <input type="url" id="admin_url_youtube" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">Facebook Link</label>
+                                <input type="url" id="admin_url_facebook" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">Pinterest Link</label>
+                                <input type="url" id="admin_url_pinterest" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">WhatsApp Channel Link</label>
+                                <input type="url" id="admin_url_whatsapp" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">X (Twitter) Link</label>
+                                <input type="url" id="admin_url_x" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">Official Website Link</label>
+                                <input type="url" id="admin_url_website" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">Android App Link</label>
+                                <input type="url" id="admin_url_android" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">iOS App Link</label>
+                                <input type="url" id="admin_url_ios" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none">
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4 pt-4 border-t border-white/5">
+                            <button onclick="saveSocialLinks()" class="px-6 py-3 rounded-lg bg-gold hover:bg-yellow-400 text-black font-semibold text-xs tracking-widest uppercase transition-colors">
+                                Commit Changes
+                            </button>
+                            <button onclick="resetSocialLinks()" class="px-6 py-3 rounded-lg bg-white/5 hover:bg-white/10 text-gray-300 font-semibold text-xs tracking-widest uppercase transition-colors">
+                                Reset Factory Defaults
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: GOOGLE REVIEWS MANAGER -->
+                    <div id="tab-review-manager" class="tab-content hidden glass-panel p-6 sm:p-8 rounded-2xl border border-white/10 space-y-6">
+                        <div class="border-b border-white/10 pb-4">
+                            <h3 class="text-xl font-bold font-space text-white">Google Review Matrix</h3>
+                            <p class="text-xs text-gray-400 mt-1">Configure active Google Review landing URLs for all 6 core branches.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">Gobi Branch Link</label>
+                                <input type="url" id="admin_rev_gobi" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">Anthiyur Branch Link</label>
+                                <input type="url" id="admin_rev_anthiyur" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">Sathy Branch Link</label>
+                                <input type="url" id="admin_rev_sathy" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">Avinashi Branch Link</label>
+                                <input type="url" id="admin_rev_avinashi" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">Thalavadi Branch Link</label>
+                                <input type="url" id="admin_rev_thalavadi" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">JMM Branch Link</label>
+                                <input type="url" id="admin_rev_jmm" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none">
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4 pt-4 border-t border-white/5">
+                            <button onclick="saveReviewLinks()" class="px-6 py-3 rounded-lg bg-gold hover:bg-yellow-400 text-black font-semibold text-xs tracking-widest uppercase transition-colors">
+                                Commit Changes
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: CONTENT MANAGER (CMS) -->
+                    <div id="tab-content-manager" class="tab-content hidden glass-panel p-6 sm:p-8 rounded-2xl border border-white/10 space-y-6">
+                        <div class="border-b border-white/10 pb-4">
+                            <h3 class="text-xl font-bold font-space text-white">Interactive Content Matrix</h3>
+                            <p class="text-xs text-gray-400 mt-1">Configure key copywriting aspects visible on public landing pages.</p>
+                        </div>
+
+                        <div class="space-y-5">
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">Hero Welcome (Top Tag)</label>
+                                <input type="text" id="admin_welcome_tag" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">Hero Title Primary</label>
+                                <input type="text" id="admin_welcome_title" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">Hero Description text</label>
+                                <textarea id="admin_welcome_subtitle" rows="3" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none resize-none"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">Social Hub Header</label>
+                                <input type="text" id="admin_social_title" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">Reviews Matrix Header</label>
+                                <input type="text" id="admin_review_title" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold tracking-wider text-gray-400 uppercase mb-2">Closing Thank You Message</label>
+                                <textarea id="admin_thank_msg" rows="3" class="w-full px-4 py-2.5 bg-black/60 border border-white/10 rounded-lg text-sm text-white focus:border-gold outline-none resize-none"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4 pt-4 border-t border-white/5">
+                            <button onclick="saveCMSContent()" class="px-6 py-3 rounded-lg bg-gold hover:bg-yellow-400 text-black font-semibold text-xs tracking-widest uppercase transition-colors">
+                                Publish Live Updates
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- TAB 4: FEEDBACK MANAGER -->
+                    <div id="tab-feedback-manager" class="tab-content hidden glass-panel p-6 sm:p-8 rounded-2xl border border-white/10 space-y-6">
+                        <div class="border-b border-white/10 pb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                            <div>
+                                <h3 class="text-xl font-bold font-space text-white">Feedback Storage Database</h3>
+                                <p class="text-xs text-gray-400 mt-1">Review, filter, query, and securely export user entries.</p>
+                            </div>
+                            <button onclick="exportFeedbackCSV()" class="px-4 py-2 bg-gold text-black rounded-lg text-xs font-bold tracking-wider uppercase transition-colors hover:bg-yellow-400 flex items-center gap-2 self-start sm:self-center">
+                                <i class="fa-solid fa-file-csv text-base"></i> Export to CSV
+                            </button>
+                        </div>
+
+                        <!-- Search and Filter Panel -->
+                        <div class="flex flex-col sm:flex-row gap-4 items-center">
+                            <div class="relative w-full sm:flex-1">
+                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500"><i class="fa-solid fa-magnifying-glass"></i></span>
+                                <input type="text" id="feedbackSearch" oninput="renderFeedbackTable()" class="w-full pl-9 pr-4 py-2 bg-black/60 border border-white/10 rounded-lg text-xs text-white focus:border-gold outline-none placeholder-gray-500" placeholder="Search feedback records...">
+                            </div>
+                            <button onclick="clearAllFeedbacks()" class="w-full sm:w-auto px-4 py-2 bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 text-red-400 text-xs font-semibold uppercase rounded-lg transition-all">
+                                Clear Database
+                            </button>
+                        </div>
+
+                        <!-- Feedback Table/Layout -->
+                        <div class="overflow-x-auto border border-white/5 rounded-xl">
+                            <table class="w-full text-left border-collapse text-xs">
+                                <thead>
+                                    <tr class="bg-white/5 border-b border-white/10 text-gray-400 uppercase tracking-wider font-semibold">
+                                        <th class="p-4">Timestamp</th>
+                                        <th class="p-4">User Details</th>
+                                        <th class="p-4">Subject</th>
+                                        <th class="p-4">Message Context</th>
+                                        <th class="p-4 text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="feedback-table-body" class="divide-y divide-white/5 text-gray-300">
+                                    <!-- Populated programmatically -->
+                                </tbody>
+                            </table>
+                            <div id="no-feedback-placeholder" class="hidden p-12 text-center text-gray-500">
+                                <i class="fa-solid fa-box-open text-3xl mb-3 block"></i>
+                                <span class="text-xs">No feedback records matching criteria found.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- MAIN FUNCTIONAL JAVASCRIPT -->
+    <script>
+        // --- 1. LOCAL STORAGE STATE INITS ---
+        // Setup initial structure with factory mock content
+        const DEFAULT_SOCIAL_LINKS = {
+            instagram: "https://instagram.com",
+            youtube: "https://youtube.com",
+            facebook: "https://facebook.com",
+            pinterest: "https://pinterest.com",
+            whatsapp: "https://whatsapp.com",
+            x: "https://x.com",
+            website: "https://google.com",
+            android: "https://play.google.com",
+            ios: "https://apple.com"
+        };
+
+        const DEFAULT_REVIEW_LINKS = {
+            gobi: "https://g.page/r/your-gobi-branch",
+            anthiyur: "https://g.page/r/your-anthiyur-branch",
+            sathy: "https://g.page/r/your-sathy-branch",
+            avinashi: "https://g.page/r/your-avinashi-branch",
+            thalavadi: "https://g.page/r/your-thalavadi-branch",
+            jmm: "https://g.page/r/your-jmm-branch"
+        };
+
+        const DEFAULT_CMS_CONTENT = {
+            welcomeTag: "THE LUXURY ECOSYSTEM HUB",
+            welcomeTitle: "DCNM DIGITAL WORLD",
+            welcomeSubtitle: "Step inside a masterfully engineered dynamic architecture built for seamless social interaction, branch performance reviews, and customer expression.",
+            socialTitle: "EXPLORE OUR SOCIAL MEDIA",
+            reviewTitle: "GOOGLE REVIEWS & FEEDBACK",
+            thankMessage: "Your presence in our ecosystem drives our relentless pursuit of futuristic luxury, perfect operational performance, and worldwide connectivity. Let us reshape the boundaries together."
+        };
+
+        // Initialize state objects
+        let socialLinks = JSON.parse(localStorage.getItem('dcnm_social_links')) || DEFAULT_SOCIAL_LINKS;
+        let reviewLinks = JSON.parse(localStorage.getItem('dcnm_review_links')) || DEFAULT_REVIEW_LINKS;
+        let cmsContent = JSON.parse(localStorage.getItem('dcnm_cms_content')) || DEFAULT_CMS_CONTENT;
+        let feedbacks = JSON.parse(localStorage.getItem('dcnm_feedbacks')) || [
+            {
+                id: "fb-1",
+                timestamp: "2026-06-12 11:34",
+                name: "Sophia Loren",
+                phone: "+91 98989 12345",
+                email: "sophia@example.com",
+                subject: "Excellent Support",
+                message: "Absolutely stunned by the luxury aesthetic of the portal and how responsive the team is to custom feedback!"
+            },
+            {
+                id: "fb-2",
+                timestamp: "2026-06-14 14:15",
+                name: "Richard Feynman",
+                phone: "+91 94444 88888",
+                email: "richard.f@example.com",
+                subject: "Sathy Branch review",
+                message: "Excellent service at the Sathy Branch, extremely helpful executives. Keep up the high standards."
+            }
+        ];
+
+        // --- 2. THE THREE.JS 3D HOLOGRAPHIC GLOBE SETUP ---
+        function initThreeJSGlobe() {
+            const container = document.getElementById('globe-container');
+            if(!container) return;
+
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+
+            // Scene & Camera
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+            camera.position.z = 220;
+
+            // Renderer setup
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
+            container.appendChild(renderer.domElement);
+
+            // Lighting setup
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+            scene.add(ambientLight);
+
+            const pointLight = new THREE.PointLight(0xD4AF37, 2, 500);
+            pointLight.position.set(100, 100, 100);
+            scene.add(pointLight);
+
+            // Cyber Globe Creation using point-clouds/lines to avoid external dependency loader failures
+            const globeGroup = new THREE.Group();
+            scene.add(globeGroup);
+
+            // 1. Holographic Point sphere (Cyan glow dots representing landmass approximation)
+            const particleCount = 1800;
+            const particlesGeo = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const r = 80;
+
+            for (let i = 0; i < particleCount; i++) {
+                // Spherical coordinate distribution
+                const phi = Math.acos(-1 + (2 * i) / particleCount);
+                const theta = Math.sqrt(particleCount * Math.PI) * phi;
+
+                const x = r * Math.sin(phi) * Math.cos(theta);
+                const y = r * Math.sin(phi) * Math.sin(theta);
+                const z = r * Math.cos(phi);
+
+                positions[i * 3] = x;
+                positions[i * 3 + 1] = y;
+                positions[i * 3 + 2] = z;
+            }
+
+            particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            
+            const particlesMat = new THREE.PointsMaterial({
+                color: 0x00f3ff,
+                size: 1.8,
+                transparent: true,
+                opacity: 0.95,
+                blending: THREE.AdditiveBlending
+            });
+
+            const pointCloud = new THREE.Points(particlesGeo, particlesMat);
+            globeGroup.add(pointCloud);
+
+            // 2. Beautiful Inner Wireframe Matrix (Gold accent luxury framework)
+            const wireSphereGeo = new THREE.SphereGeometry(78, 24, 24);
+            const wireSphereMat = new THREE.MeshBasicMaterial({
+                color: 0xD4AF37,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.1,
+                blending: THREE.AdditiveBlending
+            });
+            const wireSphere = new THREE.Mesh(wireSphereGeo, wireSphereMat);
+            globeGroup.add(wireSphere);
+
+            // 3. Cyber grid rings
+            const ringsCount = 3;
+            for(let j = 0; j < ringsCount; j++) {
+                const ringGeo = new THREE.RingGeometry(85, 85.5, 64);
+                const ringMat = new THREE.MeshBasicMaterial({
+                    color: 0x8a2be2,
+                    side: THREE.DoubleSide,
+                    transparent: true,
+                    opacity: 0.25
+                });
+                const ring = new THREE.Mesh(ringGeo, ringMat);
+                ring.rotation.x = Math.random() * Math.PI;
+                ring.rotation.y = Math.random() * Math.PI;
+                globeGroup.add(ring);
+            }
+
+            // Interactive state handlers
+            let isDragging = false;
+            let previousMousePosition = { x: 0, y: 0 };
+
+            const handleStart = (e) => {
+                isDragging = true;
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                previousMousePosition = { x: clientX, y: clientY };
+            };
+
+            const handleMove = (e) => {
+                if (!isDragging) return;
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+                const deltaMove = {
+                    x: clientX - previousMousePosition.x,
+                    y: clientY - previousMousePosition.y
+                };
+
+                globeGroup.rotation.y += deltaMove.x * 0.005;
+                globeGroup.rotation.x += deltaMove.y * 0.005;
+
+                previousMousePosition = { x: clientX, y: clientY };
+            };
+
+            const handleEnd = () => { isDragging = false; };
+
+            container.addEventListener('mousedown', handleStart);
+            container.addEventListener('mousemove', handleMove);
+            window.addEventListener('mouseup', handleEnd);
+
+            container.addEventListener('touchstart', handleStart, { passive: true });
+            container.addEventListener('touchmove', handleMove, { passive: true });
+            window.addEventListener('touchend', handleEnd);
+
+            // Animation Loop
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                // Continuous slow elegant rotation when not interacted with
+                if (!isDragging) {
+                    globeGroup.rotation.y += 0.0015;
+                    globeGroup.rotation.x += 0.0003;
+                }
+
+                renderer.render(scene, camera);
+            }
+
+            // Window Resizing Adjustments
+            window.addEventListener('resize', () => {
+                const w = container.clientWidth;
+                const h = container.clientHeight;
+                camera.aspect = w / h;
+                camera.updateProjectionMatrix();
+                renderer.setSize(w, h);
+            });
+
+            animate();
+        }
+
+        // --- 3. DYNAMIC RENDERING MODULES ---
+        // Render 9 Premium Social Redirection Cards
+        function renderSocialCards() {
+            const container = document.getElementById('social-grid');
+            if(!container) return;
+
+            // Config definition mapping visual assets with configurable links
+            const platforms = [
+                { key: 'instagram', name: 'Instagram', desc: 'Visual storytelling, updates, and interactions.', icon: 'fa-brands fa-instagram text-pink-500', colorClass: 'border-pink-500/20 hover:border-pink-500/80 shadow-pink-500/5' },
+                { key: 'youtube', name: 'YouTube', desc: 'Premium digital broadcasts and masterclass showcases.', icon: 'fa-brands fa-youtube text-red-500', colorClass: 'border-red-500/20 hover:border-red-500/80 shadow-red-500/5' },
+                { key: 'facebook', name: 'Facebook', desc: 'Community interaction and localized developments.', icon: 'fa-brands fa-facebook text-blue-600', colorClass: 'border-blue-600/20 hover:border-blue-600/80 shadow-blue-600/5' },
+                { key: 'pinterest', name: 'Pinterest', desc: 'Inspirational board designs and visual discoveries.', icon: 'fa-brands fa-pinterest text-red-600', colorClass: 'border-red-600/20 hover:border-red-600/80 shadow-red-600/5' },
+                { key: 'whatsapp', name: 'WhatsApp Channel', desc: 'Realtime ecosystem updates directly on your mobile.', icon: 'fa-brands fa-whatsapp text-green-500', colorClass: 'border-green-500/20 hover:border-green-500/80 shadow-green-500/5' },
+                { key: 'x', name: 'X Platform', desc: 'Instant messaging & analytical declarations.', icon: 'fa-brands fa-x-twitter text-white', colorClass: 'border-white/10 hover:border-white/80 shadow-white/5' },
+                { key: 'website', name: 'Official Website', desc: 'Your comprehensive digital corporate portal.', icon: 'fa-solid fa-globe text-gold', colorClass: 'border-gold/20 hover:border-gold/80 shadow-gold/5' },
+                { key: 'android', name: 'Android App', desc: 'Optimized performance engine for your mobile.', icon: 'fa-brands fa-android text-green-400', colorClass: 'border-green-400/20 hover:border-green-400/80 shadow-green-400/5' },
+                { key: 'ios', name: 'iOS App', desc: 'The apex fluid visual experience for iOS devices.', icon: 'fa-brands fa-apple text-sky-400', colorClass: 'border-sky-400/20 hover:border-sky-400/80 shadow-sky-400/5' },
+            ];
+
+            container.innerHTML = platforms.map(p => `
+                <a href="${socialLinks[p.key]}" target="_blank" rel="noopener noreferrer" class="glass-panel rounded-2xl p-8 flex flex-col justify-between group h-64 border ${p.colorClass}">
+                    <div class="space-y-4">
+                        <div class="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 transition-transform group-hover:scale-110 duration-300">
+                            <i class="${p.icon} text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold font-space text-white tracking-wide flex items-center gap-2 group-hover:text-gold transition-colors">
+                            ${p.name}
+                            <i class="fa-solid fa-chevron-right text-[10px] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                        </h3>
+                        <p class="text-gray-400 text-xs font-light leading-relaxed">${p.desc}</p>
+                    </div>
+                    
+                    <div class="pt-4 border-t border-white/5 flex items-center justify-between text-[10px] uppercase font-bold tracking-widest text-gray-400 group-hover:text-gold transition-colors">
+                        <span>Join Redirection</span>
+                        <span class="text-gray-600 group-hover:text-gold transition-colors">dcnm.link</span>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        // Render 6 Regional Google Review Branch Cards
+        function renderReviewCards() {
+            const container = document.getElementById('reviews-grid');
+            if(!container) return;
+
+            const branches = [
+                { key: 'gobi', name: 'Gobi Branch' },
+                { key: 'anthiyur', name: 'Anthiyur Branch' },
+                { key: 'sathy', name: 'Sathy Branch' },
+                { key: 'avinashi', name: 'Avinashi Branch' },
+                { key: 'thalavadi', name: 'Thalavadi Branch' },
+                { key: 'jmm', name: 'JMM Branch' }
+            ];
+
+            container.innerHTML = branches.map(b => `
+                <div class="glass-panel-gold rounded-2xl p-8 flex flex-col justify-between h-72">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs uppercase tracking-widest text-gold font-bold">Branch Hub</span>
+                            <div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-red-500">
+                                <i class="fa-brands fa-google"></i>
+                            </div>
+                        </div>
+                        
+                        <h4 class="text-xl font-extrabold font-space text-white tracking-wide">${b.name}</h4>
+                        <div class="flex items-center space-x-1 text-gold my-3 text-xs">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <span class="text-gray-400 ml-2 font-semibold">5.0 (Review Matrix)</span>
+                        </div>
+                        
+                        <p class="text-gray-400 text-xs font-light leading-relaxed">Submit your feedback directly to Google and rate your experience at our ${b.name} office.</p>
+                    </div>
+
+                    <a href="${reviewLinks[b.key]}" target="_blank" rel="noopener noreferrer" class="w-full py-3 bg-white/5 border border-white/10 hover:border-gold hover:bg-gold/10 text-white hover:text-gold rounded-lg font-bold text-xs tracking-widest uppercase transition-all duration-300 flex items-center justify-center gap-2">
+                        Write Review <i class="fa-solid fa-pen-nib"></i>
+                    </a>
+                </div>
+            `).join('');
+        }
+
+        // Apply updated typography and copywriting live from data structure
+        function applyCMSContent() {
+            // Main Home elements
+            const tag = document.getElementById('hero-welcome');
+            const title = document.getElementById('hero-title');
+            const subtitle = document.getElementById('hero-subtitle');
+            const socialTitle = document.getElementById('social-heading');
+            const reviewsTitle = document.getElementById('reviews-heading');
+            const thankTitle = document.getElementById('thankyou-title');
+
+            if(tag) tag.textContent = cmsContent.welcomeTag;
+            if(title) title.innerHTML = `<span class="gold-gradient-text">DCNM</span> <br class="hidden sm:inline">${cmsContent.welcomeTitle.replace('DCNM', '').trim()}`;
+            if(subtitle) subtitle.textContent = cmsContent.welcomeSubtitle;
+            if(socialTitle) socialTitle.innerHTML = cmsContent.socialTitle.replace('SOCIAL MEDIA', '<span class="gold-gradient-text">SOCIAL MEDIA</span>');
+            if(reviewsTitle) reviewsTitle.innerHTML = cmsContent.reviewTitle.replace('FEEDBACK', '<span class="cyber-gradient-text">FEEDBACK</span>');
+            if(thankTitle) thankTitle.innerHTML = cmsContent.thankMessage.split('.')[0] + `<br><span class="gold-gradient-text">DCNM FAMILY</span>`;
+        }
+
+        // Setup values on Admin Panel inputs to reflect actual storage state
+        function populateAdminInputs() {
+            // Links input mapping
+            for (const key in socialLinks) {
+                const input = document.getElementById(`admin_url_${key}`);
+                if (input) input.value = socialLinks[key];
+            }
+
+            // Reviews input mapping
+            for (const key in reviewLinks) {
+                const input = document.getElementById(`admin_rev_${key}`);
+                if (input) input.value = reviewLinks[key];
+            }
+
+            // CMS text blocks
+            const fields = {
+                admin_welcome_tag: cmsContent.welcomeTag,
+                admin_welcome_title: cmsContent.welcomeTitle,
+                admin_welcome_subtitle: cmsContent.welcomeSubtitle,
+                admin_social_title: cmsContent.socialTitle,
+                admin_review_title: cmsContent.reviewTitle,
+                admin_thank_msg: cmsContent.thankMessage
+            };
+
+            for (const id in fields) {
+                const el = document.getElementById(id);
+                if (el) el.value = fields[id];
+            }
+        }
+
+        // Render Feedback Table rows in Admin dashboard with full functionality
+        function renderFeedbackTable() {
+            const tbody = document.getElementById('feedback-table-body');
+            const placeholder = document.getElementById('no-feedback-placeholder');
+            if(!tbody) return;
+
+            const searchQuery = document.getElementById('feedbackSearch').value.toLowerCase();
+            const filtered = feedbacks.filter(f => 
+                f.name.toLowerCase().includes(searchQuery) ||
+                f.phone.toLowerCase().includes(searchQuery) ||
+                f.email.toLowerCase().includes(searchQuery) ||
+                f.subject.toLowerCase().includes(searchQuery) ||
+                f.message.toLowerCase().includes(searchQuery)
+            );
+
+            if(filtered.length === 0) {
+                tbody.innerHTML = '';
+                placeholder.classList.remove('hidden');
+                return;
+            }
+
+            placeholder.classList.add('hidden');
+            tbody.innerHTML = filtered.map(f => `
+                <tr class="hover:bg-white/5 transition-all">
+                    <td class="p-4 text-gray-500 align-top">${f.timestamp}</td>
+                    <td class="p-4 align-top">
+                        <div class="font-bold text-white text-sm">${f.name}</div>
+                        <div class="text-gray-400 mt-1">${f.phone}</div>
+                        <div class="text-gray-500">${f.email}</div>
+                    </td>
+                    <td class="p-4 text-gold font-semibold align-top">${f.subject}</td>
+                    <td class="p-4 max-w-xs break-words text-gray-400 align-top font-light leading-relaxed">${f.message}</td>
+                    <td class="p-4 text-right align-top">
+                        <button onclick="deleteFeedback('${f.id}')" class="px-3 py-1.5 bg-red-500/10 border border-red-500/20 hover:bg-red-500/30 hover:border-red-500 text-red-400 rounded-md transition-colors">
+                            <i class="fa-solid fa-trash"></i> Delete
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // --- 4. SECURE USER SUBMISSIONS AND INTERACTION LOGIC ---
+        function handleFeedbackSubmit(event) {
+            event.preventDefault();
+            const nameEl = document.getElementById('fb_name');
+            const phoneEl = document.getElementById('fb_phone');
+            const emailEl = document.getElementById('fb_email');
+            const subjectEl = document.getElementById('fb_subject');
+            const messageEl = document.getElementById('fb_message');
+            const errorMsgDiv = document.getElementById('form-error-msg');
+            const errorText = document.getElementById('error-text');
+
+            errorMsgDiv.classList.add('hidden');
+
+            // Quality Input Sanitization and Validations
+            const name = nameEl.value.trim();
+            const phone = phoneEl.value.trim();
+            const email = emailEl.value.trim();
+            const subject = subjectEl.value.trim();
+            const message = messageEl.value.trim();
+
+            if(!name || !phone || !email || !subject || !message) {
+                errorText.textContent = "All information spaces are mandatory.";
+                errorMsgDiv.classList.remove('hidden');
+                return;
+            }
+
+            // Strict Email Validation Regex
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if(!emailRegex.test(email)) {
+                errorText.textContent = "Please input a valid standard corporate email address.";
+                errorMsgDiv.classList.remove('hidden');
+                return;
+            }
+
+            // Basic Phone Validation Regex (Supports international variations)
+            const phoneRegex = /^[\d\s()+-]{7,20}$/;
+            if(!phoneRegex.test(phone)) {
+                errorText.textContent = "Please provide an authentic contact cell/mobile number.";
+                errorMsgDiv.classList.remove('hidden');
+                return;
+            }
+
+            // Secure Payload Generation
+            const now = new Date();
+            const timestamp = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+            
+            const newFeedback = {
+                id: 'fb-' + Date.now(),
+                timestamp,
+                name: sanitizeInput(name),
+                phone: sanitizeInput(phone),
+                email: sanitizeInput(email),
+                subject: sanitizeInput(subject),
+                message: sanitizeInput(message)
+            };
+
+            // Commit record
+            feedbacks.unshift(newFeedback);
+            localStorage.setItem('dcnm_feedbacks', JSON.stringify(feedbacks));
+
+            // Reset inputs and trigger visual success micro-interaction overlay
+            document.getElementById('feedbackForm').reset();
+            openSuccessModal();
+            renderFeedbackTable();
+        }
+
+        // High Level XSS Prevention sanitizing values before state mapping
+        function sanitizeInput(str) {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                }[tag] || tag)
+            );
+        }
+
+        // Success overlay trigger toggles
+        function openSuccessModal() {
+            const modal = document.getElementById('successModal');
+            modal.classList.remove('pointer-events-none');
+            modal.classList.add('opacity-100');
+        }
+
+        function closeSuccessModal() {
+            const modal = document.getElementById('successModal');
+            modal.classList.add('pointer-events-none');
+            modal.classList.remove('opacity-100');
+        }
+
+        // --- 5. SECURE ADMIN CREDENTIAL & LOGOUT IMPLEMENTATION ---
+        function toggleLoginModal(show) {
+            const modal = document.getElementById('loginModal');
+            document.getElementById('login-error').classList.add('hidden');
+            if(show) {
+                modal.classList.remove('pointer-events-none');
+                modal.classList.add('opacity-100');
+                document.getElementById('username').focus();
+            } else {
+                modal.classList.add('pointer-events-none');
+                modal.classList.remove('opacity-100');
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const userVal = document.getElementById('username').value.trim();
+            const passVal = document.getElementById('password').value;
+            const errorDiv = document.getElementById('login-error');
+
+            errorDiv.classList.add('hidden');
+
+            // Secure standard match checking
+            if(userVal === 'dcnm' && passVal === 'zN#9vL$2xP&5rK!7') {
+                // Set session token
+                sessionStorage.setItem('dcnm_admin_authenticated', 'true');
+                toggleLoginModal(false);
+                openAdminDashboard();
+            } else {
+                errorDiv.classList.remove('hidden');
+            }
+        }
+
+        function openAdminDashboard() {
+            const dashboard = document.getElementById('adminDashboard');
+            // Ensure inputs populated
+            populateAdminInputs();
+            renderFeedbackTable();
+            // Show overlay beautifully
+            dashboard.classList.remove('pointer-events-none');
+            dashboard.classList.add('opacity-100');
+            document.body.style.overflow = 'hidden'; // Lock background body scrolling
+        }
+
+        function handleLogout() {
+            sessionStorage.removeItem('dcnm_admin_authenticated');
+            const dashboard = document.getElementById('adminDashboard');
+            dashboard.classList.add('pointer-events-none');
+            dashboard.classList.remove('opacity-100');
+            document.body.style.overflow = ''; // Release layout scroll
+            // Scroll user smoothly to home page and flash visual status feedback
+            window.location.hash = '#hero';
+        }
+
+        // Admin interface tab switching mechanics
+        function switchTab(tabId) {
+            // Hide all tab components
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(c => c.classList.add('hidden'));
+
+            // Show active
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+            // Reset tab button styles back to inactive status
+            const buttons = ['social-manager', 'review-manager', 'content-manager', 'feedback-manager'];
+            buttons.forEach(b => {
+                const btn = document.getElementById(`tab-btn-${b}`);
+                if(btn) {
+                    btn.className = "w-full text-left px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white font-semibold text-xs tracking-widest uppercase transition-all flex items-center justify-between";
+                }
+            });
+
+            // Set active design class to selected trigger button
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            if(activeBtn) {
+                activeBtn.className = "w-full text-left px-4 py-3 rounded-xl bg-gold text-black font-semibold text-xs tracking-widest uppercase transition-all flex items-center justify-between";
+            }
+        }
+
+        // --- 6. ADMIN CMS ACTIONS AND SAVE CONTROLS ---
+        function triggerSuccessSaveFlash() {
+            const banner = document.getElementById('save-success-banner');
+            banner.classList.remove('hidden');
+            setTimeout(() => {
+                banner.classList.add('hidden');
+            }, 4000);
+        }
+
+        function saveSocialLinks() {
+            for (const key in socialLinks) {
+                const input = document.getElementById(`admin_url_${key}`);
+                if(input) {
+                    socialLinks[key] = input.value.trim();
+                }
+            }
+            localStorage.setItem('dcnm_social_links', JSON.stringify(socialLinks));
+            renderSocialCards();
+            triggerSuccessSaveFlash();
+        }
+
+        function resetSocialLinks() {
+            socialLinks = {...DEFAULT_SOCIAL_LINKS};
+            localStorage.setItem('dcnm_social_links', JSON.stringify(socialLinks));
+            populateAdminInputs();
+            renderSocialCards();
+            triggerSuccessSaveFlash();
+        }
+
+        function saveReviewLinks() {
+            for (const key in reviewLinks) {
+                const input = document.getElementById(`admin_rev_${key}`);
+                if(input) {
+                    reviewLinks[key] = input.value.trim();
+                }
+            }
+            localStorage.setItem('dcnm_review_links', JSON.stringify(reviewLinks));
+            renderReviewCards();
+            triggerSuccessSaveFlash();
+        }
+
+        function saveCMSContent() {
+            cmsContent.welcomeTag = document.getElementById('admin_welcome_tag').value.trim();
+            cmsContent.welcomeTitle = document.getElementById('admin_welcome_title').value.trim();
+            cmsContent.welcomeSubtitle = document.getElementById('admin_welcome_subtitle').value.trim();
+            cmsContent.socialTitle = document.getElementById('admin_social_title').value.trim();
+            cmsContent.reviewTitle = document.getElementById('admin_review_title').value.trim();
+            cmsContent.thankMessage = document.getElementById('admin_thank_msg').value.trim();
+
+            localStorage.setItem('dcnm_cms_content', JSON.stringify(cmsContent));
+            applyCMSContent();
+            triggerSuccessSaveFlash();
+        }
+
+        // Delete individual feedback item
+        function deleteFeedback(id) {
+            feedbacks = feedbacks.filter(f => f.id !== id);
+            localStorage.setItem('dcnm_feedbacks', JSON.stringify(feedbacks));
+            renderFeedbackTable();
+        }
+
+        // Clear entire feedback database
+        function clearAllFeedbacks() {
+            if(confirm("Confirm action: Clear feedback history securely?")) {
+                feedbacks = [];
+                localStorage.setItem('dcnm_feedbacks', JSON.stringify(feedbacks));
+                renderFeedbackTable();
+            }
+        }
+
+        // Export Feedback Database to CSV format cleanly
+        function exportFeedbackCSV() {
+            if (feedbacks.length === 0) {
+                alert("Database is currently empty.");
+                return;
+            }
+
+            // Headers
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "Timestamp,Name,Phone,Email,Subject,Message\n";
+
+            // Row mapping
+            feedbacks.forEach(f => {
+                // Escape quotes
+                const name = `"${f.name.replace(/"/g, '""')}"`;
+                const phone = `"${f.phone.replace(/"/g, '""')}"`;
+                const email = `"${f.email.replace(/"/g, '""')}"`;
+                const subject = `"${f.subject.replace(/"/g, '""')}"`;
+                const msg = `"${f.message.replace(/"/g, '""')}"`;
+                csvContent += `${f.timestamp},${name},${phone},${email},${subject},${msg}\n`;
+            });
+
+            // File generation download pattern
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `DCNM_Feedback_Report_${Date.now()}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // --- 7. DEEP BACKGROUND SPACE PARTICLE STARS CANVAS ---
+        function runSpaceStarField() {
+            const canvas = document.getElementById('stars-canvas');
+            if(!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            let w = canvas.width = window.innerWidth;
+            let h = canvas.height = window.innerHeight;
+
+            const stars = [];
+            const count = 100;
+
+            for(let i=0; i<count; i++) {
+                stars.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    size: Math.random() * 1.5,
+                    opacity: Math.random(),
+                    speed: Math.random() * 0.015 + 0.005
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, w, h);
+                
+                stars.forEach(star => {
+                    ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Subtle continuous up drift
+                    star.y -= star.speed;
+                    if(star.y < 0) {
+                        star.y = h;
+                        star.x = Math.random() * w;
+                    }
+                });
+
+                requestAnimationFrame(draw);
+            }
+
+            window.addEventListener('resize', () => {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
+            });
+
+            draw();
+        }
+
+        // --- 8. GLOBAL INITIALIZATION ON LOAD ---
+        window.addEventListener('load', () => {
+            // Apply current year to footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Check if active persistent session exists
+            if(sessionStorage.getItem('dcnm_admin_authenticated') === 'true') {
+                openAdminDashboard();
+            }
+
+            // Run visuals
+            initThreeJSGlobe();
+            renderSocialCards();
+            renderReviewCards();
+            applyCMSContent();
+            runSpaceStarField();
+        });
+    </script>
+</body>
+</html>
